@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Chris Real Estate</h1>
+    <h3>The easy way to view and list houses for sale</h3>
+    <form class="login-form" (ngSubmit)="submitForm()" #loginForm="ngForm">
+      <label for="usernameOrEmail">Username or Email:</label>
+      <input type="text" id="usernameOrEmail" name="usernameOrEmail" [(ngModel)]="usernameOrEmail" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+    <a href="http://localhost:4200/signup" class="signup-link">Don't have an account? Sign up.</a>
+  </div>
+  

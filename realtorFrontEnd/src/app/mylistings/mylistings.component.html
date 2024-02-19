@@ -1,0 +1,39 @@
+<div *ngIf="houses.length > 0; else noListings">
+  <div *ngFor="let house of houses">
+    <form (ngSubmit)="updateListing(house)">
+      <h4>{{ house.address }}</h4>
+      <carousel>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <slide *ngFor="let objectKey of house.objectKeys">
+          <div class="d-flex justify-content-center">
+            <img [src]="getS3ImageUrl(objectKey)" alt="Listing Image">
+          </div>
+        </slide>
+      </carousel>
+      <div class="container">
+        <label for="price">Price: $</label>
+        <input type="text" id="price" name="price" [(ngModel)]="house.price" placeholder="{{ house.price }}">
+        <label for="beds">Beds:</label>
+        <input type="text" id="beds" name="beds" [(ngModel)]="house.beds" placeholder="{{ house.beds }}">
+        <label for="baths">Baths:</label>
+        <input type="text" id="baths" name="baths" [(ngModel)]="house.baths" placeholder="{{ house.baths }}">
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size" [(ngModel)]="house.size" placeholder="{{ house.size }}">
+        <label for="imageUpload">Upload Images:</label>
+        <input type="file" id="imageUpload" name="imageUpload" (change)="onImagesSelected($event)" multiple>
+        <button type="submit">Update</button>
+        <button type="button" (click)="deleteListing(house)">Delete Listing</button>
+      </div>
+    </form>
+  </div>
+</div>
+<ng-template #noListings>
+  <p>You currently have no listings.</p>
+</ng-template>

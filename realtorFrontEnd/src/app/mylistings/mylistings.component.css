@@ -1,0 +1,53 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+width: 50px;
+height: 50px;
+background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+border-radius: 50%; /* Rounded shape */
+color: white; /* Arrow color */
+}
+
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+
+.container {
+  background-color: #f2f2f2; /* Light grey background */
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  margin: 20px auto;
+  text-align: center;
+}
+.container button {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.container button:hover {
+  background-color: darkred;
+}
+
+button {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkred;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}

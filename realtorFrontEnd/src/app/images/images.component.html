@@ -1,0 +1,7 @@
+<div class="container">
+  <form (ngSubmit)="submitForm()" #imagesForm="ngForm">
+    <label for="imageUpload">Upload Images:</label>
+    <input type="file" id="imageUpload" name="imageUpload" (change)="onImagesSelected($event)" multiple required>
+    <button type="submit" [disabled]="!imagesForm.form.valid">Upload</button>
+  </form>
+</div>

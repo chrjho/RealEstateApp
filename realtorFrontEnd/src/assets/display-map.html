@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Map</title>
+</head>
+<body>
+  <div id="map" style="height: 500px; width: 100%;"></div>
+  <script>
+    let housesData;
+
+    window.addEventListener('message', (event) => {
+      const dataFromParent = event.data;
+      housesData = dataFromParent;
+      initMap();
+    });
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+      });
+      document.getElementById("map").style.height = "100vh";
+      document.getElementById("map").style.width = "100%";
+
+      const geocoder = new google.maps.Geocoder();
+
+      housesData.forEach((house) => {
+        const address = house.address;
+        const price = house.price;
+        const seller = house.seller;
+        const beds = house.beds;
+        const baths = house.baths;
+        const size = house.size;
+        const listing = house.listing;
+
+
+        geocoder.geocode({ address: address }, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            const location = results[0].geometry.location;
+            const latLng = `${location.lat()},${location.lng()}`;
+            const imageUrl = `https://maps.googleapis.com/maps/api/streetview?size=1000x500&location=${latLng}&key=KEY`;
+
+            const marker = new google.maps.Marker({
+              position: results[0].geometry.location,
+              map: map,
+              title: address,
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+              content: createInfoWindowContent(listing,address, imageUrl, price, seller, beds, baths, size),
+            });
+
+            marker.addListener('click', () => {
+              infoWindow.open(map, marker);
+            });
+          } else {
+            console.log("Geocode was not successful for the following reason: " + status);
+          }
+        });
+      });
+
+      // Get the user's location using the Geolocation API
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            map.setCenter(userLocation);
+          },
+          (error) => {
+            console.log("Error getting user location:", error);
+          }
+        );
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function createInfoWindowContent(listing,address, imageUrl, price, seller, beds, baths, size) {
+      return `<h3>${address}</h3>
+              <img src="${imageUrl}" alt="Street View" width="300" height="200">
+              <h3>$${price}</h3>
+              <h3>Seller: ${seller}</h3>
+              <h3>Beds: ${beds}</h3>
+              <h3>Baths: ${baths}</h3>
+              <h3>Size: ${size} sqft</h3>
+              <a href="javascript:void(0);" onclick="redirectToMoreInfo('${listing}')">See More</a>`;
+    }
+    
+    function redirectToMoreInfo(listing) {
+      // Redirect the parent window to the desired URL
+      window.parent.location.href = `http://localhost:4200/view/${listing}`;
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=KEY" async defer></script>
+</body>
+</html>

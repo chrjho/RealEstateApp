@@ -1,0 +1,11 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+  </body>
+  <ng-container *ngIf="!isLoginPage() && !isSignupPage()">
+    <app-navbar></app-navbar>
+  </ng-container>
+  <router-outlet></router-outlet>
+</html>

@@ -1,0 +1,8 @@
+<h1>Explore all available houses!</h1>
+<div *ngIf="!houseData">
+    <p>Loading house data...</p>
+</div>
+<div *ngIf="houseData">
+    <app-map [houseData]="houseData"></app-map>
+</div>
+<!-- <app-listing *ngFor="let address of listOfAddresses; let i = index;" [address]="address" [seller]="sellers[i]" [pictureUrl]="listOfPictureUrls[i]"></app-listing> -->

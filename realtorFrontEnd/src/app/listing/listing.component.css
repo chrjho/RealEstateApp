@@ -1,0 +1,25 @@
+.listing {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .listing-image {
+    margin-right: 10px;
+  }
+  
+  .listing-image img {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .listing-details h3 {
+    margin: 0;
+  }
+  
+  .listing-details p {
+    margin: 0;
+    font-weight: bold;
+  }

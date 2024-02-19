@@ -1,0 +1,21 @@
+.rounded-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:5px;
+  }
+  
+  .rounded-button:hover {
+    background-color: darkred;
+  }
+
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
